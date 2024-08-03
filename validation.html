@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style>
+        body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            margin: 0;
+        }
+        form{
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background-color: blue;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: darkblue;
+        }
+    </style>
+</head>
+<body>
+
+    <form id="contactForm">
+        <h2 style="color: red;">We would like to help you</h2>
+
+        <input type="text" id="name" name="name" placeholder="Name" required><br>
+        <span id="nameError" class="error"></span>
+
+        <input type="text" id="message" name="message" placeholder="Message" minlength="5" required><br>
+        <span id="messageError" class="error"></span>
+
+        <h4 style="color: gray;">How to answer you?</h4>
+
+        <input type="number" id="phone" name="phone" placeholder="Phone number" required><br>
+
+        <input type="email" id="email" name="email" placeholder="Email" required><br>
+        <span id="emailError" class="error"></span>
+
+        <button type="submit">Send message</button><br>
+    </form>
+
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            let isValid = true;
+
+            const name = document.getElementById('name');
+            const message = document.getElementById('message');
+            const phone = document.getElementById('phone'); // Added this line
+            const email = document.getElementById('email');
+
+            const nameError = document.getElementById('nameError');
+            const messageError = document.getElementById('messageError');
+            const emailError = document.getElementById('emailError');
+
+            // Validate Name
+            if (name.value.trim() === '') {
+                nameError.style.display = 'block';
+                isValid = false;
+            } else {
+                nameError.style.display = 'none';
+            }
+
+            // Validate Message
+            if (message.value.trim().length < 5) {
+                messageError.style.display = 'block';
+                isValid = false;
+            } else {
+                messageError.style.display = 'none';
+            }
+
+            // Validate Email
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailPattern.test(email.value.trim())) {
+                emailError.style.display = 'block';
+                isValid = false;
+            } else {
+                emailError.style.display = 'none';
+            }
+
+            if (isValid) {
+                // Log form data to console
+                console.log('Name:', name.value);
+                console.log('Message:', message.value);
+                console.log('Phone:', phone.value); // Fixed this line
+                console.log('Email:', email.value);
+            }
+        });
+    </script>
+</body>
+
+
+
+
+</body>
+</html>
